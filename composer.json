@@ -1,0 +1,38 @@
+{
+    "name": "hexlet/code",
+    "type": "project",
+    "description": "gendiff application",
+    "license": "MIT",
+    "scripts": {
+        "test": "phpunit tests"
+    },
+    "autoload": {
+        "files": [
+            "src/Differ.php",
+            "src/Parser.php",
+            "src/NodeTypes.php",
+            "src/Formatter/Stylish.php",
+            "src/Formatter/index.php"
+        ],
+        "psr-4": {
+            "Hexlet\\Code\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/gendiff"
+    ],
+    "authors": [
+        {
+            "name": "Артём Белый",
+            "email": "arcmadcan@yandex.ru"
+        }
+    ],
+    "require": {
+        "docopt/docopt": "^1.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^4.0",
+        "phpunit/phpunit": "^13.2",
+        "symfony/var-dumper": "^8.1"
+    }
+}

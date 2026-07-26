@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
+
+use function Hexlet\Code\genDiff;
+
+$doc = <<<DOC
+Generate diff
+
+Usage:
+  gendiff (-h|--help)
+  gendiff (-v|--version)
+  gendiff [--format <fmt>] <firstFile> <secondFile>
+
+Options:
+  -h --help                     Show this screen
+  -v --version                  Show version
+  --format <fmt>                Report format [default: stylish]
+DOC;
+
+$params = [
+    'argv' => array_slice($_SERVER['argv'], 1),
+    'help' => false,
+    'version' => "0.0.1rc1"
+];
+
+$args = Docopt::handle($doc, $params);
+$format = $args['--format'];
+$firstFile = $args['<firstFile>'];
+$secondFile = $args['<secondFile>'];
+
+$diff = genDiff($firstFile, $secondFile);
+
+echo $diff;

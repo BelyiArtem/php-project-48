@@ -1,0 +1,9 @@
+# IntelliJ project files
+.idea
+# VS Code project files
+.vscode
+# Composer
+vendor
+# System files
+.DS_Store
+*.cast
