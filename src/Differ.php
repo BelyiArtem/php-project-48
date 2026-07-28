@@ -69,7 +69,9 @@ function compare(array $firstData, array $secondData): array
 function sortKeys(array $keys): array
 {
     $sorted = $keys;
-    sort($sorted);
+    usort($sorted, function ($curr, $next) {
+        return mb_strtolower($curr) <=> mb_strtolower($next);
+    });
 
     return $sorted;
 }

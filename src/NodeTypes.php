@@ -1,4 +1,5 @@
 <?php
+
 namespace Hexlet\Code;
 
 const STATUS_ADDED = 'added';

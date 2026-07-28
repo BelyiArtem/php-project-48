@@ -2,7 +2,7 @@
 
 namespace Hexlet\Code\Formatter;
 
-use function Hexlet\Code\Formatter\toString;
+use function Hexlet\Code\Formatter\stringify;
 
 use const Hexlet\Code\STATUS_NESTED;
 use const Hexlet\Code\STATUS_REMOVED;
@@ -34,13 +34,13 @@ function formatChanged(array $node): array
 {
     $line = [];
     if (isset($node['oldValue']) && isset($node['newValue'])) {
-        $line[] = "- {$node['key']}: " . toString($node['oldValue']);
-        $line[] = "+ {$node['key']}: " . toString($node['newValue']);
+        $line[] = "- {$node['key']}: " . stringify($node['oldValue']);
+        $line[] = "+ {$node['key']}: " . stringify($node['newValue']);
 
         return $line;
     }
 
-    $line[] = "- {$node['key']}: " . toString($node['value']);
+    $line[] = "- {$node['key']}: " . stringify($node['value']);
 
     return $line;
 }
@@ -48,21 +48,21 @@ function formatChanged(array $node): array
 function formatRemoved(array $node): array
 {
     return [
-        "- {$node['key']}: " . toString($node['value'])
+        "- {$node['key']}: " . stringify($node['value'])
     ];
 }
 
 function formatUnchanged(array $node): array
 {
     return [
-        "  {$node['key']}: " . toString($node['value'])
+        "  {$node['key']}: " . stringify($node['value'])
     ];
 }
 
 function formatAdded(array $node): array
 {
     return [
-        "+ {$node['key']}: " . toString($node['value'])
+        "+ {$node['key']}: " . stringify($node['value'])
     ];
 }
 

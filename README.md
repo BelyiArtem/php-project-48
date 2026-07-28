@@ -12,6 +12,6 @@
 [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=BelyiArtem_php-project-48)
 
 <h1>Project "Gendiff"</h1>
-Example stylish format (relative/abslute path)
+Example stylish format (relative/absolute path)
 
 [![asciicast](https://asciinema.org/a/LP2UH0QkF1LTQviO.svg)](https://asciinema.org/a/LP2UH0QkF1LTQviO)

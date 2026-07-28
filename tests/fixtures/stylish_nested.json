@@ -1,0 +1,16 @@
+{
+  "host": "common.io",
+  "asc": 139,
+  "timeout": 150,
+  "proxy": "100.200.00.22",
+  "common": {
+    "ip": "192.168.0.1",
+    "port": 445
+  },
+  "tcp": true,
+  "tls": true,
+  "default": {
+    "http" : false,
+    "trace": null
+  }
+}
