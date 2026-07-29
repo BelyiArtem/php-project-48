@@ -1,21 +1,21 @@
 {
-- ASC: 139
-+ asc: 139
-+ common: {
-    ip: 192.168.0.1
-    port: 445
-}
-  default: {
-  http: false
-  trace: null
-}
-- follow: false
-- host: hexlet.io
-+ host: common.io
-- proxy: 123.234.53.22
-+ proxy: 100.200.00.22
-+ tcp: true
-- timeout: 50
-+ timeout: 150
-  tls: true
+  - ASC: 139
+  + asc: 139
+  + common: {
+        ip: 192.168.0.1
+        port: 445
+    }
+    default: {
+        http: false
+        trace: null
+    }
+  - follow: false
+  - host: hexlet.io
+  + host: common.io
+  - proxy: 123.234.53.22
+  + proxy: 100.200.00.22
+  + tcp: true
+  - timeout: 50
+  + timeout: 150
+    tls: true
 }

@@ -37,6 +37,6 @@ $format = $args['--format'];
 $firstFile = $args['<firstFile>'];
 $secondFile = $args['<secondFile>'];
 
-$diff = genDiff($firstFile, $secondFile);
+$diff = genDiff($firstFile, $secondFile, $format);
 
 echo $diff;

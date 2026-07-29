@@ -1,6 +1,8 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function Hexlet\Code\parse;
 use function Hexlet\Code\compare;
 use function Hexlet\Code\genDiff;
@@ -11,22 +13,13 @@ use const Hexlet\Code\STATUS_ADDED;
 use const Hexlet\Code\STATUS_CHANGED;
 use const Hexlet\Code\STATUS_UNCHANGED;
 
-class StylishTest extends TestCase
+class GenDiffTest extends TestCase
 {
-    private string $simpleFile;
-    private string $nestedFile;
-    protected function setUp(): void
+    #[DataProvider('fileProvider')]
+    public function testParse(string $format): void
     {
-        parent::setUp();
-
-        $this->simpleFile = $this->getFixtureFullPath('stylish.json');
-        $this->nestedFile = $this->getFixtureFullPath('stylish_nested.json');
-    }
-
-    public function testParseJson(): void
-    {
-        $parsedSimpleFile = parse($this->simpleFile);
-        $parsedNestedFile = parse($this->nestedFile);
+        $simpleFile = parse($this->getFixtureFullPath("$format/file.$format"));
+        $nestedFile = parse($this->getFixtureFullPath("$format/file_nested.$format"));
 
         $this->assertEquals([
             "ASC" => 139,
@@ -39,7 +32,7 @@ class StylishTest extends TestCase
                 "http" => false,
                 "trace" => null
             ]
-        ], $parsedSimpleFile);
+        ], $simpleFile);
 
         $this->assertEquals([
             "asc" => 139,
@@ -56,20 +49,14 @@ class StylishTest extends TestCase
                 "http" => false,
                 "trace" => null
             ]
-        ], $parsedNestedFile);
+        ], $nestedFile);
     }
 
-    public function testHandleInvalidFile(): void
+    #[DataProvider('fileProvider')]
+    public function testCompareFunction(string $format): void
     {
-        $wrongFile = $this->getFixtureFullPath('st1.json');
-        $this->expectException(InvalidArgumentException::class);
-        parse($wrongFile);
-    }
-
-    public function testCompareFunction(): void
-    {
-        $parsedSimpleFile = parse($this->simpleFile);
-        $parsedNestedFile = parse($this->nestedFile);
+        $simpleFile = parse($this->getFixtureFullPath("$format/file.$format"));
+        $nestedFile = parse($this->getFixtureFullPath("$format/file_nested.$format"));
         $expectedArray = [
             [
                 'key' => 'ASC',
@@ -140,16 +127,33 @@ class StylishTest extends TestCase
             ],
         ];
 
-        $actualArray = compare($parsedSimpleFile, $parsedNestedFile);
-        $this->assertEquals($expectedArray, $actualArray);
+        $this->assertEquals($expectedArray, compare($simpleFile, $nestedFile));
     }
 
-    public function testGenDiff(): void
+    #[DataProvider('fileProvider')]
+    public function testGenDiff(string $format): void
     {
-        $actualString = genDiff($this->simpleFile, $this->nestedFile);
+        $simpleFile = $this->getFixtureFullPath("$format/file.$format");
+        $nestedFile = $this->getFixtureFullPath("$format/file_nested.$format");
+        $actualString = genDiff($simpleFile, $nestedFile);
         $expected = file_get_contents($this->getFixtureFullPath('expected_stylish.txt'));
 
         $this->assertSame($expected, $actualString);
+    }
+
+    public function testHandleInvalidFile(): void
+    {
+        $wrongFile = $this->getFixtureFullPath('st1.json');
+        $this->expectException(InvalidArgumentException::class);
+        parse($wrongFile);
+    }
+
+    public static function fileProvider(): array
+    {
+        return [
+            'json' => ['json'],
+            'yml'  => ['yml'],
+        ];
     }
 
     private function getFixtureFullPath(string $fixtureName): string

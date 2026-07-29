@@ -12,7 +12,11 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=BelyiArtem_php-project-48&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=BelyiArtem_php-project-48)
 [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=BelyiArtem_php-project-48)
 
-<h1>Project "Gendiff"</h1>
-Example stylish format (relative/absolute path)
+<h1>Project "Gendiff"</h1> 
+1) Difference between two JSON files
 
 [![asciicast](https://asciinema.org/a/LP2UH0QkF1LTQviO.svg)](https://asciinema.org/a/LP2UH0QkF1LTQviO)
+
+2) Difference between two YML files
+
+[![asciicast](https://asciinema.org/a/gCDrg2oegE2kVPhJ.svg)](https://asciinema.org/a/gCDrg2oegE2kVPhJ)

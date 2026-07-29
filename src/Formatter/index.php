@@ -6,6 +6,8 @@ use InvalidArgumentException;
 
 use function Hexlet\Code\Formatter\stylish;
 
+const INDENT_SIZE = 4;
+
 function format(array $tree, string $format = 'stylish'): string
 {
     return match ($format) {
@@ -14,16 +16,16 @@ function format(array $tree, string $format = 'stylish'): string
     };
 }
 
-function stringify($value, string $replacer = ' ', int $indentWidth = 4): string
+function stringify($value, int $depth = 1): string
 {
-    $iter = function ($currentValue, $depth) use (&$iter, $replacer, $indentWidth) {
+    $iter = function ($currentValue, $depth) use (&$iter) {
         if (!is_array($currentValue)) {
             return toString($currentValue);
         }
 
-        $indentSize = $depth * $indentWidth;
-        $currentIndent = str_repeat($replacer, $indentSize);
-        $bracketIndent = str_repeat($replacer, $indentSize - $indentWidth);
+        $indentWidth = getIndent($depth);
+        $currentIndent = indent($indentWidth);
+        $bracketIndent = indent($indentWidth - INDENT_SIZE);
 
         $lines = array_map(
             fn($key, $val) => "$currentIndent$key: {$iter($val, $depth + 1)}",
@@ -36,7 +38,7 @@ function stringify($value, string $replacer = ' ', int $indentWidth = 4): string
         return implode("\n", $result);
     };
 
-    return $iter($value, 1);
+    return $iter($value, $depth);
 }
 
 function toString(mixed $value): string
@@ -46,4 +48,19 @@ function toString(mixed $value): string
     }
 
     return trim(var_export($value, true), "'");
+}
+
+function indent(int $count): string
+{
+    return str_repeat(' ', $count);
+}
+
+function getIndent(int $depth): int
+{
+    return INDENT_SIZE * $depth;
+}
+
+function getSignIndent(int $depth): int
+{
+    return INDENT_SIZE * $depth - 2;
 }

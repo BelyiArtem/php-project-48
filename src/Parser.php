@@ -3,6 +3,7 @@
 namespace Hexlet\Code;
 
 use InvalidArgumentException;
+use Symfony\Component\Yaml\Yaml;
 
 function parse(string $path): array
 {
@@ -10,7 +11,11 @@ function parse(string $path): array
         throw new InvalidArgumentException("File '$path' not found.");
     }
 
-    $fileContent = file_get_contents($path);
+    $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
-    return json_decode($fileContent, true, 512, JSON_THROW_ON_ERROR);
+    return match ($extension) {
+        'json' => json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR),
+        'yml' => Yaml::parseFile($path),
+        default => throw new InvalidArgumentException("Format '$extension' is not supported."),
+    };
 }
