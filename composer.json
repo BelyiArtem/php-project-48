@@ -10,9 +10,9 @@
         "files": [
             "src/Differ.php",
             "src/Parser.php",
-            "src/NodeTypes.php",
+            "src/TreeBuilder.php",
             "src/Formatter/Stylish.php",
-            "src/Formatter/index.php"
+            "src/Formatter/Format.php"
         ],
         "psr-4": {
             "Hexlet\\Code\\": "src/"
