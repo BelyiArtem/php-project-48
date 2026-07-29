@@ -18,112 +18,188 @@ class GenDiffTest extends TestCase
     #[DataProvider('fileProvider')]
     public function testParse(string $format): void
     {
-        $simpleFile = parse($this->getFixtureFullPath("$format/file.$format"));
-        $nestedFile = parse($this->getFixtureFullPath("$format/file_nested.$format"));
+        $simpleFile = parse($this->getFixtureFullPath("$format/file1.$format"));
+        $nestedFile = parse($this->getFixtureFullPath("$format/file2.$format"));
 
         $this->assertEquals([
-            "ASC" => 139,
-            "host" => "hexlet.io",
-            "timeout" => 50,
-            "proxy" => "123.234.53.22",
-            "follow" => false,
-            "tls" => true,
-            "default" => [
-                "http" => false,
-                "trace" => null
-            ]
+            'common' => [
+                'setting1' => 'Value 1',
+                'setting2' => 200,
+                'setting3' => true,
+                'setting6' => [
+                    'key' => 'value',
+                    'doge' => [
+                        'wow' => '',
+                    ],
+                ],
+            ],
+            'group1' => [
+                'baz' => 'bas',
+                'foo' => 'bar',
+                'nest' => [
+                    'key' => 'value',
+                ],
+            ],
+            'group2' => [
+                'abc' => 12345,
+                'deep' => [
+                    'id' => 45,
+                ],
+            ],
         ], $simpleFile);
 
         $this->assertEquals([
-            "asc" => 139,
-            "host" => "common.io",
-            "timeout" => 150,
-            "proxy" => "100.200.00.22",
-            "common" => [
-                "ip" => "192.168.0.1",
-                "port" => 445
+            'common' => [
+                'follow' => false,
+                'setting1' => 'Value 1',
+                'setting3' => null,
+                'setting4' => 'blah blah',
+                'setting5' => [
+                    'key5' => 'value5',
+                ],
+                'setting6' => [
+                    'key' => 'value',
+                    'ops' => 'vops',
+                    'doge' => [
+                        'wow' => 'so much',
+                    ],
+                ],
             ],
-            "tcp" => true,
-            "tls" => true,
-            "default" => [
-                "http" => false,
-                "trace" => null
-            ]
+            'group1' => [
+                'foo' => 'bar',
+                'baz' => 'bars',
+                'nest' => 'str',
+            ],
+            'group3' => [
+                'deep' => [
+                    'id' => [
+                        'number' => 45,
+                    ],
+                ],
+                'fee' => 100500,
+            ],
         ], $nestedFile);
     }
 
     #[DataProvider('fileProvider')]
     public function testCompareFunction(string $format): void
     {
-        $simpleFile = parse($this->getFixtureFullPath("$format/file.$format"));
-        $nestedFile = parse($this->getFixtureFullPath("$format/file_nested.$format"));
+        $simpleFile = parse($this->getFixtureFullPath("$format/file1.$format"));
+        $nestedFile = parse($this->getFixtureFullPath("$format/file2.$format"));
         $expectedArray = [
             [
-                'key' => 'ASC',
-                'type' => STATUS_REMOVED,
-                'value' => 139
-            ],
-            [
-                'key' => 'asc',
-                'type' => STATUS_ADDED,
-                'value' => 139
-            ],
-            [
                 'key' => 'common',
-                'type' => STATUS_ADDED,
-                'value' => [
-                    "ip" => "192.168.0.1",
-                    "port" => 445
-                ]
-            ],
-            [
-                'key' => 'default',
                 'type' => STATUS_NESTED,
                 'children' => [
                     [
-                        'key' => 'http',
-                        'type' => STATUS_UNCHANGED,
-                        'value' => false
+                        'key' => 'follow',
+                        'type' => STATUS_ADDED,
+                        'value' => false,
                     ],
                     [
-                        'key' => 'trace',
+                        'key' => 'setting1',
                         'type' => STATUS_UNCHANGED,
-                        'value' => null
-                    ]
-                ]
+                        'value' => 'Value 1',
+                    ],
+                    [
+                        'key' => 'setting2',
+                        'type' => STATUS_REMOVED,
+                        'value' => 200,
+                    ],
+                    [
+                        'key' => 'setting3',
+                        'type' => STATUS_CHANGED,
+                        'oldValue' => true,
+                        'newValue' => null,
+                    ],
+                    [
+                        'key' => 'setting4',
+                        'type' => STATUS_ADDED,
+                        'value' => 'blah blah',
+                    ],
+                    [
+                        'key' => 'setting5',
+                        'type' => STATUS_ADDED,
+                        'value' => [
+                            'key5' => 'value5',
+                        ],
+                    ],
+                    [
+                        'key' => 'setting6',
+                        'type' => STATUS_NESTED,
+                        'children' => [
+                            [
+                                'key' => 'doge',
+                                'type' => STATUS_NESTED,
+                                'children' => [
+                                    [
+                                        'key' => 'wow',
+                                        'type' => STATUS_CHANGED,
+                                        'oldValue' => '',
+                                        'newValue' => 'so much',
+                                    ],
+                                ],
+                            ],
+                            [
+                                'key' => 'key',
+                                'type' => STATUS_UNCHANGED,
+                                'value' => 'value',
+                            ],
+                            [
+                                'key' => 'ops',
+                                'type' => STATUS_ADDED,
+                                'value' => 'vops',
+                            ],
+                        ],
+                    ],
+                ],
             ],
             [
-                'key' => 'follow',
+                'key' => 'group1',
+                'type' => STATUS_NESTED,
+                'children' => [
+                    [
+                        'key' => 'baz',
+                        'type' => STATUS_CHANGED,
+                        'oldValue' => 'bas',
+                        'newValue' => 'bars',
+                    ],
+                    [
+                        'key' => 'foo',
+                        'type' => STATUS_UNCHANGED,
+                        'value' => 'bar',
+                    ],
+                    [
+                        'key' => 'nest',
+                        'type' => STATUS_CHANGED,
+                        'oldValue' => [
+                            'key' => 'value',
+                        ],
+                        'newValue' => 'str',
+                    ],
+                ],
+            ],
+            [
+                'key' => 'group2',
                 'type' => STATUS_REMOVED,
-                'value' => false
+                'value' => [
+                    'abc' => 12345,
+                    'deep' => [
+                        'id' => 45,
+                    ],
+                ],
             ],
             [
-                'key' => 'host',
-                'type' => STATUS_CHANGED,
-                'oldValue' => "hexlet.io",
-                "newValue" => "common.io"
-            ],
-            [
-                'key' => 'proxy',
-                'type' => STATUS_CHANGED,
-                'oldValue' => "123.234.53.22",
-                'newValue' => "100.200.00.22"
-            ],
-            [
-                'key' => 'tcp',
+                'key' => 'group3',
                 'type' => STATUS_ADDED,
-                'value' => true
-            ],
-            [
-                'key' => 'timeout',
-                'type' => STATUS_CHANGED,
-                'oldValue' => 50,
-                'newValue' => 150
-            ],
-            [
-                'key' => 'tls',
-                'type' => STATUS_UNCHANGED,
-                'value' => true
+                'value' => [
+                    'deep' => [
+                        'id' => [
+                            'number' => 45,
+                        ],
+                    ],
+                    'fee' => 100500,
+                ],
             ],
         ];
 
@@ -133,8 +209,8 @@ class GenDiffTest extends TestCase
     #[DataProvider('fileProvider')]
     public function testGenDiff(string $format): void
     {
-        $simpleFile = $this->getFixtureFullPath("$format/file.$format");
-        $nestedFile = $this->getFixtureFullPath("$format/file_nested.$format");
+        $simpleFile = $this->getFixtureFullPath("$format/file1.$format");
+        $nestedFile = $this->getFixtureFullPath("$format/file2.$format");
         $actualString = genDiff($simpleFile, $nestedFile);
         $expected = file_get_contents($this->getFixtureFullPath('expected_stylish.txt'));
 
