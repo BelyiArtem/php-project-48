@@ -3,9 +3,9 @@
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-use function Hexlet\Code\parse;
-use function Hexlet\Code\compare;
-use function Hexlet\Code\genDiff;
+use function Differ\Differ\parse;
+use function Differ\Differ\compare;
+use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {

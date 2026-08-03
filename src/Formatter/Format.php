@@ -1,11 +1,11 @@
 <?php
 
-namespace Hexlet\Code\Formatter;
+namespace Differ\Differ\Formatter;
 
 use InvalidArgumentException;
 
-use function Hexlet\Code\Formatter\stylish;
-use function Hexlet\Code\Formatter\plain;
+use function Differ\Differ\Formatter\stylish;
+use function Differ\Differ\Formatter\plain;
 
 const INDENT_SIZE = 4;
 

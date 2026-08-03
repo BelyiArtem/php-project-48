@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexlet\Code;
+namespace Differ\Differ;
 
 use InvalidArgumentException;
 use Symfony\Component\Yaml\Yaml;

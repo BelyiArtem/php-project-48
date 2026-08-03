@@ -1,12 +1,12 @@
 <?php
 
-namespace Hexlet\Code\Formatter;
+namespace Differ\Differ\Formatter;
 
-use const Hexlet\Code\STATUS_NESTED;
-use const Hexlet\Code\STATUS_REMOVED;
-use const Hexlet\Code\STATUS_ADDED;
-use const Hexlet\Code\STATUS_CHANGED;
-use const Hexlet\Code\STATUS_UNCHANGED;
+use const Differ\Differ\STATUS_NESTED;
+use const Differ\Differ\STATUS_REMOVED;
+use const Differ\Differ\STATUS_ADDED;
+use const Differ\Differ\STATUS_CHANGED;
+use const Differ\Differ\STATUS_UNCHANGED;
 
 function plain(array $tree, string $path = ''): string
 {

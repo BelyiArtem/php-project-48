@@ -17,7 +17,7 @@
             "src/Formatter/Format.php"
         ],
         "psr-4": {
-            "Hexlet\\Code\\": "src/"
+            "Differ\\Differ\\": "src/"
         }
     },
     "bin": [

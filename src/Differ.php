@@ -1,9 +1,9 @@
 <?php
 
-namespace Hexlet\Code;
+namespace Differ\Differ;
 
-use function Hexlet\Code\parse;
-use function Hexlet\Code\Formatter\format;
+use function Differ\Differ\parse;
+use function Differ\Differ\Formatter\format;
 
 function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
 {

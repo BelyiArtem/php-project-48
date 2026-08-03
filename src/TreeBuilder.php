@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexlet\Code;
+namespace Differ\Differ;
 
 const STATUS_ADDED = 'added';
 const STATUS_REMOVED = 'removed';
