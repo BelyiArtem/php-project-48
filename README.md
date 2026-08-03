@@ -29,6 +29,7 @@ Supported output formats:
 
 - `stylish`
 - `plain`
+- `json`
 
 ---
 
