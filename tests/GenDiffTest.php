@@ -69,10 +69,14 @@ class GenDiffTest extends TestCase
     public static function fileProvider(): array
     {
         return [
-            'json + stylish' => ['json', 'stylish', 'stylish.txt'],
-            'yml + stylish' => ['yml', 'stylish', 'stylish.txt'],
-            'json + plain' => ['json', 'plain', 'plain.txt'],
-            'yml + plain' => ['yml', 'plain', 'plain.txt'],
+            'json → stylish' => ['json', 'stylish', 'stylish.txt'],
+            'yml → stylish'  => ['yml', 'stylish', 'stylish.txt'],
+
+            'json → plain'   => ['json', 'plain', 'plain.txt'],
+            'yml → plain'    => ['yml', 'plain', 'plain.txt'],
+
+            'json → json'    => ['json', 'json', 'json.txt'],
+            'yml → json'     => ['yml', 'json', 'json.txt'],
         ];
     }
 

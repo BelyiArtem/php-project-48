@@ -89,6 +89,12 @@ or
 
 ---
 
+### Compare two JSON files
+
+[![asciicast](https://asciinema.org/a/4hvEMz9TQkgjvlbH.svg)](https://asciinema.org/a/4hvEMz9TQkgjvlbH)
+
+---
+
 ## Development
 
 Run linter:

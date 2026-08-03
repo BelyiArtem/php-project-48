@@ -56,11 +56,13 @@ function formatPlainNested(array $node, string $property): array
 
 function toPlainValue(mixed $value): string
 {
-    return match (true) {
-        is_array($value) => '[complex value]',
-        is_string($value) => "'$value'",
-        is_bool($value) => $value ? 'true' : 'false',
-        $value === null => 'null',
-        default => (string) $value
-    };
+    if (is_array($value)) {
+        return '[complex value]';
+    }
+
+    if (is_string($value)) {
+        return "'$value'";
+    }
+
+    return toString($value);
 }

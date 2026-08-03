@@ -79,3 +79,43 @@ function formatNested(array $node, int $depth): array
         "$indent{$node['key']}: " . stylish($node['children'], $depth + 1)
     ];
 }
+
+function stringify($value, int $depth = 1): string
+{
+    $iter = function ($currentValue, $depth) use (&$iter) {
+        if (!is_array($currentValue)) {
+            return toString($currentValue);
+        }
+
+        $indentWidth = getIndent($depth);
+        $currentIndent = indent($indentWidth);
+        $bracketIndent = indent($indentWidth - INDENT_SIZE);
+
+        $lines = array_map(
+            fn($key, $val) => "$currentIndent$key: {$iter($val, $depth + 1)}",
+            array_keys($currentValue),
+            $currentValue
+        );
+
+        $result = ['{', ...$lines, "$bracketIndent}"];
+
+        return implode("\n", $result);
+    };
+
+    return $iter($value, $depth);
+}
+
+function indent(int $count): string
+{
+    return str_repeat(' ', $count);
+}
+
+function getIndent(int $depth): int
+{
+    return INDENT_SIZE * $depth;
+}
+
+function getSignIndent(int $depth): int
+{
+    return INDENT_SIZE * $depth - 2;
+}

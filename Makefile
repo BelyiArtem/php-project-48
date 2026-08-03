@@ -14,5 +14,7 @@ demo-plain:
 	./bin/gendiff --format plain tests/fixtures/json/file1.json tests/fixtures/json/file2.json
 demo-yaml:
 	./bin/gendiff tests/fixtures/yml/file1.yml tests/fixtures/yml/file2.yml
+demo-json:
+	./bin/gendiff --format json tests/fixtures/json/file1.json tests/fixtures/json/file2.json
 lint:
 	composer exec --verbose phpcs -- --standard=PSR12 src

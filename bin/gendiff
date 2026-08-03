@@ -37,4 +37,4 @@ $format = $args['--format'];
 $firstFile = $args['<firstFile>'];
 $secondFile = $args['<secondFile>'];
 
-echo genDiff($firstFile, $secondFile, $format);
+echo genDiff($firstFile, $secondFile, $format) . PHP_EOL;
