@@ -32,7 +32,7 @@ function formatChanged(array $node, int $depth): array
     $line = [];
     $indent = indent(getSignIndent($depth));
 
-    if (array_key_exists('oldValue', $node) && array_key_exists('newValue',$node)) {
+    if (array_key_exists('oldValue', $node) && array_key_exists('newValue', $node)) {
         $line[] = "$indent- {$node['key']}: " . stringify($node['oldValue'], $depth + 1);
         $line[] = "$indent+ {$node['key']}: " . stringify($node['newValue'], $depth + 1);
 

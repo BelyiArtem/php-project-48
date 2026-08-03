@@ -12,6 +12,7 @@
             "src/Parser.php",
             "src/TreeBuilder.php",
             "src/Formatter/Stylish.php",
+            "src/Formatter/Plain.php",
             "src/Formatter/Format.php"
         ],
         "psr-4": {

@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';
 $autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
 
@@ -37,6 +37,4 @@ $format = $args['--format'];
 $firstFile = $args['<firstFile>'];
 $secondFile = $args['<secondFile>'];
 
-$diff = genDiff($firstFile, $secondFile, $format);
-
-echo $diff;
+echo genDiff($firstFile, $secondFile, $format);

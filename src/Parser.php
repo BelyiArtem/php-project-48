@@ -15,7 +15,7 @@ function parse(string $path): array
 
     return match ($extension) {
         'json' => json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR),
-        'yml' => Yaml::parseFile($path),
+        'yml', 'yaml' => Yaml::parseFile($path),
         default => throw new InvalidArgumentException("Format '$extension' is not supported."),
     };
 }

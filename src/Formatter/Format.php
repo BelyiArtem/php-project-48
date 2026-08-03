@@ -5,6 +5,7 @@ namespace Hexlet\Code\Formatter;
 use InvalidArgumentException;
 
 use function Hexlet\Code\Formatter\stylish;
+use function Hexlet\Code\Formatter\plain;
 
 const INDENT_SIZE = 4;
 
@@ -12,6 +13,7 @@ function format(array $tree, string $format = 'stylish'): string
 {
     return match ($format) {
         'stylish' => stylish($tree),
+        'plain' => plain($tree),
         default => throw new InvalidArgumentException("Format $format is not supported!"),
     };
 }
