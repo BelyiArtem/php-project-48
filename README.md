@@ -14,6 +14,7 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=BelyiArtem_php-project-48&metric=bugs)](https://sonarcloud.io/summary/new_code?id=BelyiArtem_php-project-48)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=BelyiArtem_php-project-48&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=BelyiArtem_php-project-48)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=BelyiArtem_php-project-48&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=BelyiArtem_php-project-48)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=BelyiArtem_php-project-48&metric=coverage)](https://sonarcloud.io/summary/new_code?id=BelyiArtem_php-project-48)
 ---
 
 ## Description
