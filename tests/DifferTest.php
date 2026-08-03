@@ -7,7 +7,7 @@ use function Hexlet\Code\parse;
 use function Hexlet\Code\compare;
 use function Hexlet\Code\genDiff;
 
-class GenDiffTest extends TestCase
+class DifferTest extends TestCase
 {
     #[DataProvider('formatProvider')]
     public function testParse(string $format): void
