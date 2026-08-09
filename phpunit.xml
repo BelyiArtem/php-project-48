@@ -15,11 +15,14 @@
         displayDetailsOnTestsThatTriggerErrors="true"
         displayDetailsOnTestsThatTriggerNotices="true"
         displayDetailsOnTestsThatTriggerWarnings="true"
-        displayDetailsOnPhpunitDeprecations="true"
+        displayDetailsOnPhpunitDeprecations="false"
 >
     <source>
         <include>
             <directory suffix=".php">./src</directory>
         </include>
+        <exclude>
+            <directory>vendor</directory>
+        </exclude>
     </source>
 </phpunit>

@@ -1,6 +1,8 @@
 <?php
 
-namespace Differ\Differ\Formatter;
+namespace Differ\Differ\Formatters\Stylish;
+
+use function Differ\Differ\Formatter\toString;
 
 use const Differ\Differ\STATUS_NESTED;
 use const Differ\Differ\STATUS_REMOVED;
@@ -8,7 +10,9 @@ use const Differ\Differ\STATUS_ADDED;
 use const Differ\Differ\STATUS_CHANGED;
 use const Differ\Differ\STATUS_UNCHANGED;
 
-function stylish(array $tree, int $depth = 1): string
+const INDENT_SIZE = 4;
+
+function render(array $tree, int $depth = 1): string
 {
     $formatedTree = array_reduce($tree, function ($lines, $node) use ($depth) {
         $item = match ($node['type']) {
@@ -29,55 +33,46 @@ function stylish(array $tree, int $depth = 1): string
 
 function formatChanged(array $node, int $depth): array
 {
-    $line = [];
     $indent = indent(getSignIndent($depth));
+    $oldValue = stringify($node['oldValue'], $depth + 1);
+    $newValue = stringify($node['newValue'], $depth + 1);
 
-    if (array_key_exists('oldValue', $node) && array_key_exists('newValue', $node)) {
-        $line[] = "$indent- {$node['key']}: " . stringify($node['oldValue'], $depth + 1);
-        $line[] = "$indent+ {$node['key']}: " . stringify($node['newValue'], $depth + 1);
-
-        return $line;
-    }
-
-    $line[] = "$indent- {$node['key']}: " . stringify($node['value'], $depth + 1);
-
-    return $line;
+    return [
+        "$indent- {$node['key']}: $oldValue",
+        "$indent+ {$node['key']}: $newValue",
+    ];
 }
 
 function formatRemoved(array $node, int $depth): array
 {
     $indent = indent(getSignIndent($depth));
+    $value = stringify($node['value'], $depth + 1);
 
-    return [
-        "$indent- {$node['key']}: " . stringify($node['value'], $depth + 1)
-    ];
+    return ["$indent- {$node['key']}: $value"];
 }
 
 function formatUnchanged(array $node, int $depth): array
 {
     $indent = indent(getIndent($depth));
+    $value = stringify($node['value'], $depth + 1);
 
-    return [
-        "$indent{$node['key']}: " . stringify($node['value'], $depth + 1)
-    ];
+    return ["$indent{$node['key']}: $value"];
 }
 
 function formatAdded(array $node, int $depth): array
 {
     $indent = indent(getSignIndent($depth));
+    $value = stringify($node['value'], $depth + 1);
 
-    return [
-        "$indent+ {$node['key']}: " . stringify($node['value'], $depth + 1)
-    ];
+    return ["$indent+ {$node['key']}: $value"];
 }
 
 function formatNested(array $node, int $depth): array
 {
     $indent = indent(getIndent($depth));
+    $value = render($node['children'], $depth + 1);
 
-    return [
-        "$indent{$node['key']}: " . stylish($node['children'], $depth + 1)
-    ];
+    return ["$indent{$node['key']}: $value"];
 }
 
 function stringify($value, int $depth = 1): string

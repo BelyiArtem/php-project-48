@@ -1,6 +1,8 @@
 <?php
 
-namespace Differ\Differ\Formatter;
+namespace Differ\Differ\Formatters\Plain;
+
+use function Differ\Differ\Formatter\toString;
 
 use const Differ\Differ\STATUS_NESTED;
 use const Differ\Differ\STATUS_REMOVED;
@@ -8,7 +10,7 @@ use const Differ\Differ\STATUS_ADDED;
 use const Differ\Differ\STATUS_CHANGED;
 use const Differ\Differ\STATUS_UNCHANGED;
 
-function plain(array $tree, string $path = ''): string
+function render(array $tree, string $path = ''): string
 {
     $formatedTree = array_reduce($tree, function ($lines, $node) use ($path) {
         $item = match ($node['type']) {
@@ -27,7 +29,7 @@ function plain(array $tree, string $path = ''): string
 
 function formatPlainChanged(array $node, string $property): array
 {
-    $property .= $node['key'];
+    $property = "{$property}{$node['key']}";
     $oldValue = toPlainValue($node['oldValue']);
     $newValue = toPlainValue($node['newValue']);
 
@@ -36,20 +38,22 @@ function formatPlainChanged(array $node, string $property): array
 
 function formatPlainRemoved(array $node, string $property): array
 {
-    $property .= $node['key'];
+    $property = "{$property}{$node['key']}";
     return ["Property '$property' was removed"];
 }
 
 function formatPlainAdded(array $node, string $property): array
 {
-    $property .= $node['key'];
-    return ["Property '$property' was added with value: " . toPlainValue($node['value'])];
+    $property = "{$property}{$node['key']}";
+    $value = toPlainValue($node['value']);
+
+    return ["Property '$property' was added with value: $value"];
 }
 
 function formatPlainNested(array $node, string $property): array
 {
-    $property .= $node['key'] . '.';
-    $result = plain($node['children'], $property);
+    $property = "{$property}{$node['key']}.";
+    $result = render($node['children'], $property);
 
     return $result === '' ? [] : explode("\n", $result);
 }

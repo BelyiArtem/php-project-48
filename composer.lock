@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9563bfbc818062b2e321c676dd1e4374",
+    "content-hash": "abe88c9e36f64272f4b633171c4feafa",
     "packages": [
         {
             "name": "docopt/docopt",
@@ -52,6 +52,65 @@
                 "source": "https://github.com/docopt/docopt.php/tree/1.0.6"
             },
             "time": "2025-01-20T00:35:03+00:00"
+        },
+        {
+            "name": "funct/funct",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BelyiArtem/funct.git",
+                "reference": "94484f15306bac0c94f09dedd87e65f96f619f4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BelyiArtem/funct/zipball/94484f15306bac0c94f09dedd87e65f96f619f4f",
+                "reference": "94484f15306bac0c94f09dedd87e65f96f619f4f",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Funct\\": "src"
+                },
+                "files": [
+                    "src/Collection.php",
+                    "src/General.php",
+                    "src/Invoke.php",
+                    "src/Object.php",
+                    "src/Strings.php"
+                ]
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "test-ci": [
+                    "vendor/bin/phpunit -c phpunit.xml.ci"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aurimas Niekis",
+                    "email": "aurimas@niekis.lt"
+                }
+            ],
+            "description": "A PHP library with commonly used code blocks",
+            "support": {
+                "source": "https://github.com/BelyiArtem/funct/tree/master"
+            },
+            "time": "2026-08-04T15:22:19+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2458,7 +2517,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "funct/funct": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},

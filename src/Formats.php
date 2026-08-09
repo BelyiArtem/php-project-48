@@ -4,17 +4,16 @@ namespace Differ\Differ\Formatter;
 
 use InvalidArgumentException;
 
-use function Differ\Differ\Formatter\stylish;
-use function Differ\Differ\Formatter\plain;
-
-const INDENT_SIZE = 4;
+use function Differ\Differ\Formatters\Json\render as renderJson;
+use function Differ\Differ\Formatters\Plain\render as renderPlain;
+use function Differ\Differ\Formatters\Stylish\render as renderStylish;
 
 function format(array $tree, string $format = 'stylish'): string
 {
     return match ($format) {
-        'stylish' => stylish($tree),
-        'plain' => plain($tree),
-        'json' => json($tree),
+        'stylish' => renderStylish($tree),
+        'plain' => renderPlain($tree),
+        'json' => renderJson($tree),
         default => throw new InvalidArgumentException("Format $format is not supported!"),
     };
 }

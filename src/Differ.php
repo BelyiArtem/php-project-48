@@ -2,15 +2,31 @@
 
 namespace Differ\Differ;
 
-use function Differ\Differ\parse;
+use InvalidArgumentException;
+
 use function Differ\Differ\Formatter\format;
 
 function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
 {
-    $firstData = parse($firstFile);
-    $secondData = parse($secondFile);
+    [$firstContent, $firstExtension] = readFile($firstFile);
+    [$secondContent, $secondExtension] = readFile($secondFile);
+
+    $firstData = parse($firstContent, $firstExtension);
+    $secondData = parse($secondContent, $secondExtension);
 
     $tree = compare($firstData, $secondData);
 
     return format($tree, $format);
+}
+
+function readFile(string $path): array
+{
+    if (!file_exists($path)) {
+        throw new InvalidArgumentException("File '$path' not found.");
+    }
+
+    return [
+        file_get_contents($path),
+        strtolower(pathinfo($path, PATHINFO_EXTENSION)),
+    ];
 }

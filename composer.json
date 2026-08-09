@@ -9,16 +9,13 @@
     "autoload": {
         "files": [
             "src/Differ.php",
-            "src/Parser.php",
+            "src/Parsers.php",
             "src/TreeBuilder.php",
-            "src/Formatter/Stylish.php",
-            "src/Formatter/Plain.php",
-            "src/Formatter/Json.php",
-            "src/Formatter/Format.php"
-        ],
-        "psr-4": {
-            "Differ\\Differ\\": "src/"
-        }
+            "src/Formats.php",
+            "src/Formatters/Stylish.php",
+            "src/Formatters/Plain.php",
+            "src/Formatters/Json.php"
+        ]
     },
     "bin": [
         "bin/gendiff"
@@ -29,9 +26,16 @@
             "email": "arcmadcan@yandex.ru"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/BelyiArtem/funct"
+        }
+    ],
     "require": {
         "docopt/docopt": "^1.0",
-        "symfony/yaml": "^7.3"
+        "symfony/yaml": "^7.3",
+        "funct/funct": "dev-master"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^4.0",

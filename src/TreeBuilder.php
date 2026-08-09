@@ -2,6 +2,8 @@
 
 namespace Differ\Differ;
 
+use function Funct\Collection\sortBy;
+
 const STATUS_ADDED = 'added';
 const STATUS_REMOVED = 'removed';
 const STATUS_CHANGED = 'changed';
@@ -10,10 +12,10 @@ const STATUS_NESTED = 'nested';
 
 function compare(array $firstData, array $secondData): array
 {
-    $sortedKeys = sortKeys(array_unique(array_merge(
-        array_keys($firstData),
-        array_keys($secondData)
-    )));
+    $keys = array_unique(array_merge(array_keys($firstData), array_keys($secondData)));
+    $sortedKeys  = array_values(
+        sortBy($keys, fn($key) => mb_strtolower($key))
+    );
 
     return array_map(
         fn($key) => buildNode($key, $firstData, $secondData),
@@ -69,14 +71,4 @@ function buildExistingNode(string $key, array $firstData, array $secondData): ar
         'oldValue' => $oldValue,
         'newValue' => $newValue,
     ];
-}
-
-function sortKeys(array $keys): array
-{
-    $sorted = $keys;
-    usort($sorted, function ($curr, $next) {
-        return mb_strtolower($curr) <=> mb_strtolower($next);
-    });
-
-    return $sorted;
 }
