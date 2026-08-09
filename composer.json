@@ -41,5 +41,7 @@
         "squizlabs/php_codesniffer": "^4.0",
         "phpunit/phpunit": "^13.2",
         "symfony/var-dumper": "^8.1"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
