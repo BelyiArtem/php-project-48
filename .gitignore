@@ -9,3 +9,4 @@ vendor
 *.cast
 build
 coverage.xml
+.phpunit.result.cache

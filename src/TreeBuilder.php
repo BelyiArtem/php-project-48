@@ -2,8 +2,6 @@
 
 namespace Differ\Differ;
 
-use function Funct\Collection\sortBy;
-
 const STATUS_ADDED = 'added';
 const STATUS_REMOVED = 'removed';
 const STATUS_CHANGED = 'changed';
@@ -71,4 +69,23 @@ function buildExistingNode(string $key, array $firstData, array $secondData): ar
         'oldValue' => $oldValue,
         'newValue' => $newValue,
     ];
+}
+
+function sortBy(array $collection, callable|string $sortBy, string $sortFunction = 'asort'): array
+{
+    if (!is_callable($sortBy)) {
+        $sortBy = static fn ($item) => $item[$sortBy];
+    }
+
+    $values = array_map($sortBy, $collection);
+
+    $sortFunction($values);
+
+    $result = [];
+
+    foreach (array_keys($values) as $key) {
+        $result[$key] = $collection[$key];
+    }
+
+    return $result;
 }
