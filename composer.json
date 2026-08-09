@@ -35,7 +35,7 @@
     "require": {
         "docopt/docopt": "^1.0",
         "symfony/yaml": "^7.3",
-        "funct/funct": "dev-master"
+        "funct/funct": "dev-master@dev"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^4.0",
