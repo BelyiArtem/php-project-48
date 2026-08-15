@@ -3,44 +3,45 @@
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-use function Differ\Differ\parse;
-use function Differ\Differ\readFile;
-use function Differ\Differ\compare;
-use function Differ\Differ\genDiff;
+use function Differ\readFile;
+use function Differ\compare;
+use function Differ\genDiff;
+
+use const Differ\STATUS_NESTED;
+use const Differ\STATUS_REMOVED;
+use const Differ\STATUS_ADDED;
+use const Differ\STATUS_CHANGED;
+use const Differ\STATUS_UNCHANGED;
 
 class DifferTest extends TestCase
 {
-    #[DataProvider('formatProvider')]
-    public function testCompare(string $format): void
+    #[DataProvider('compareDataProvider')]
+    public function testCompare(array $firstData, array $secondData, array $expected): void
     {
-        [$firstContent, $firstExtension] = readFile($this->getFixtureFullPath("$format/file1.$format"));
-        [$secondContent, $secondExtension] = readFile($this->getFixtureFullPath("$format/file2.$format"));
-
-        $firstData = parse($firstContent, $firstExtension);
-        $secondData = parse($secondContent, $secondExtension);
-        $expected = json_decode(
-            file_get_contents($this->getFixtureFullPath("expected/compare.json")),
-            true,
-            512,
-            JSON_THROW_ON_ERROR
-        );
-
-        $this->assertEquals($expected, compare($firstData, $secondData));
+        $this->assertSame($expected, compare($firstData, $secondData));
     }
 
     #[DataProvider('fileProvider')]
-    public function testGenDiff(string $inputFormat, ?string $outputFormat, string $expectedFixture): void
+    public function testGenDiff(string $inputFormat, string $outputFormat, string $expectedFixture): void
     {
         $firstFile = $this->getFixtureFullPath("$inputFormat/file1.$inputFormat");
         $secondFile = $this->getFixtureFullPath("$inputFormat/file2.$inputFormat");
 
-        $actual = $outputFormat === null
-            ? genDiff($firstFile, $secondFile)
-            : genDiff($firstFile, $secondFile, $outputFormat);
-
         $this->assertStringEqualsFile(
             $this->getFixtureFullPath("expected/$expectedFixture"),
-            $actual
+            genDiff($firstFile, $secondFile, $outputFormat)
+        );
+    }
+
+    #[DataProvider('formatProvider')]
+    public function testDefaultGenDiff(string $format): void
+    {
+        $firstFile = $this->getFixtureFullPath("$format/file1.$format");
+        $secondFile = $this->getFixtureFullPath("$format/file2.$format");
+
+        $this->assertStringEqualsFile(
+            $this->getFixtureFullPath("expected/stylish.txt"),
+            genDiff($firstFile, $secondFile)
         );
     }
 
@@ -62,9 +63,6 @@ class DifferTest extends TestCase
 
             'json → json'    => ['json', 'json', 'json.txt'],
             'yml → json'     => ['yml', 'json', 'json.txt'],
-
-            'json -> default' => ['json', null, 'stylish.txt'],
-            'yml -> default' => ['yml', null, 'stylish.txt'],
         ];
     }
 
@@ -73,6 +71,77 @@ class DifferTest extends TestCase
         return [
             ['json'],
             ['yml'],
+        ];
+    }
+
+    public static function compareDataProvider(): array
+    {
+        return [
+            'added property' => [
+                ['foo' => 'bar'],
+                ['foo' => 'bar', 'baz' => 'qux'],
+                [
+                    [
+                        'key' => 'baz',
+                        'type' => STATUS_ADDED,
+                        'value' => 'qux',
+                    ],
+                    [
+                        'key' => 'foo',
+                        'type' => STATUS_UNCHANGED,
+                        'value' => 'bar',
+                    ],
+                ],
+            ],
+
+            'removed property' => [
+                ['foo' => 'bar', 'baz' => 'qux'],
+                ['foo' => 'bar'],
+                [
+                    [
+                        'key' => 'baz',
+                        'type' => STATUS_REMOVED,
+                        'value' => 'qux',
+                    ],
+                    [
+                        'key' => 'foo',
+                        'type' => STATUS_UNCHANGED,
+                        'value' => 'bar',
+                    ],
+                ],
+            ],
+
+            'changed property' => [
+                ['foo' => 'bar'],
+                ['foo' => 'baz'],
+                [
+                    [
+                        'key' => 'foo',
+                        'type' => STATUS_CHANGED,
+                        'oldValue' => 'bar',
+                        'newValue' => 'baz',
+                    ],
+                ],
+            ],
+
+            'nested property' => [
+                ['common' => ['foo' => 'bar']],
+                ['common' => ['foo' => 'baz']],
+                [
+                    [
+                        'key' => 'common',
+                        'type' => STATUS_NESTED,
+                        'children' => [
+                            [
+                                'key' => 'foo',
+                                'type' => STATUS_CHANGED,
+                                'oldValue' => 'bar',
+                                'newValue' => 'baz',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 

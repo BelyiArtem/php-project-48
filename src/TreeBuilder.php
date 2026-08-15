@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Differ;
+namespace Differ;
 
 const STATUS_ADDED = 'added';
 const STATUS_REMOVED = 'removed';

@@ -1,12 +1,12 @@
 <?php
 
-namespace Differ\Differ\Formatter;
+namespace Differ\Formatter;
 
 use InvalidArgumentException;
 
-use function Differ\Differ\Formatters\Json\render as renderJson;
-use function Differ\Differ\Formatters\Plain\render as renderPlain;
-use function Differ\Differ\Formatters\Stylish\render as renderStylish;
+use function Differ\Formatters\Json\render as renderJson;
+use function Differ\Formatters\Plain\render as renderPlain;
+use function Differ\Formatters\Stylish\render as renderStylish;
 
 function format(array $tree, string $format = 'stylish'): string
 {

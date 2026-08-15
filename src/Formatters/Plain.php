@@ -1,14 +1,14 @@
 <?php
 
-namespace Differ\Differ\Formatters\Plain;
+namespace Differ\Formatters\Plain;
 
-use function Differ\Differ\Formatter\toString;
+use function Differ\Formatter\toString;
 
-use const Differ\Differ\STATUS_NESTED;
-use const Differ\Differ\STATUS_REMOVED;
-use const Differ\Differ\STATUS_ADDED;
-use const Differ\Differ\STATUS_CHANGED;
-use const Differ\Differ\STATUS_UNCHANGED;
+use const Differ\STATUS_NESTED;
+use const Differ\STATUS_REMOVED;
+use const Differ\STATUS_ADDED;
+use const Differ\STATUS_CHANGED;
+use const Differ\STATUS_UNCHANGED;
 
 function render(array $tree, string $path = ''): string
 {

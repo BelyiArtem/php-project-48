@@ -1,14 +1,14 @@
 <?php
 
-namespace Differ\Differ\Formatters\Stylish;
+namespace Differ\Formatters\Stylish;
 
-use function Differ\Differ\Formatter\toString;
+use function Differ\Formatter\toString;
 
-use const Differ\Differ\STATUS_NESTED;
-use const Differ\Differ\STATUS_REMOVED;
-use const Differ\Differ\STATUS_ADDED;
-use const Differ\Differ\STATUS_CHANGED;
-use const Differ\Differ\STATUS_UNCHANGED;
+use const Differ\STATUS_NESTED;
+use const Differ\STATUS_REMOVED;
+use const Differ\STATUS_ADDED;
+use const Differ\STATUS_CHANGED;
+use const Differ\STATUS_UNCHANGED;
 
 const INDENT_SIZE = 4;
 
@@ -77,27 +77,29 @@ function formatNested(array $node, int $depth): array
 
 function stringify($value, int $depth = 1): string
 {
-    $iter = function ($currentValue, $depth) use (&$iter) {
-        if (!is_array($currentValue)) {
-            return toString($currentValue);
-        }
+    if (!is_array($value)) {
+        return toString($value);
+    }
 
-        $indentWidth = getIndent($depth);
-        $currentIndent = indent($indentWidth);
-        $bracketIndent = indent($indentWidth - INDENT_SIZE);
+    $indentWidth = getIndent($depth);
+    $currentIndent = indent($indentWidth);
+    $bracketIndent = indent($indentWidth - INDENT_SIZE);
 
-        $lines = array_map(
-            fn($key, $val) => "$currentIndent$key: {$iter($val, $depth + 1)}",
-            array_keys($currentValue),
-            $currentValue
-        );
+    $lines = array_map(
+        function ($key, $val) use ($currentIndent, $depth) {
+            $value = stringify($val, $depth + 1);
 
-        $result = ['{', ...$lines, "$bracketIndent}"];
+            return "{$currentIndent}{$key}: {$value}";
+        },
+        array_keys($value),
+        $value
+    );
 
-        return implode("\n", $result);
-    };
-
-    return $iter($value, $depth);
+    return implode("\n", [
+        '{',
+        ...$lines,
+        "{$bracketIndent}}",
+    ]);
 }
 
 function indent(int $count): string
