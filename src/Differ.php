@@ -1,10 +1,12 @@
 <?php
 
-namespace Differ;
+namespace Differ\Differ;
 
 use InvalidArgumentException;
 
 use function Differ\Formatter\format;
+use function Differ\Parsers\parse;
+use function Differ\TreeBuilder\compare;
 
 function genDiff(string $firstFile, string $secondFile, string $format = 'stylish'): string
 {

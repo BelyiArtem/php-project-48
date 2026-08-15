@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ;
+namespace Differ\TreeBuilder;
 
 const STATUS_ADDED = 'added';
 const STATUS_REMOVED = 'removed';

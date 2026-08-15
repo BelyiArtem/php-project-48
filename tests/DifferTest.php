@@ -3,15 +3,15 @@
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-use function Differ\readFile;
-use function Differ\compare;
-use function Differ\genDiff;
+use function Differ\Differ\readFile;
+use function Differ\TreeBuilder\compare;
+use function Differ\Differ\genDiff;
 
-use const Differ\STATUS_NESTED;
-use const Differ\STATUS_REMOVED;
-use const Differ\STATUS_ADDED;
-use const Differ\STATUS_CHANGED;
-use const Differ\STATUS_UNCHANGED;
+use const Differ\TreeBuilder\STATUS_NESTED;
+use const Differ\TreeBuilder\STATUS_REMOVED;
+use const Differ\TreeBuilder\STATUS_ADDED;
+use const Differ\TreeBuilder\STATUS_CHANGED;
+use const Differ\TreeBuilder\STATUS_UNCHANGED;
 
 class DifferTest extends TestCase
 {

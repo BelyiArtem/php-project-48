@@ -4,11 +4,11 @@ namespace Differ\Formatters\Stylish;
 
 use function Differ\Formatter\toString;
 
-use const Differ\STATUS_NESTED;
-use const Differ\STATUS_REMOVED;
-use const Differ\STATUS_ADDED;
-use const Differ\STATUS_CHANGED;
-use const Differ\STATUS_UNCHANGED;
+use const Differ\TreeBuilder\STATUS_NESTED;
+use const Differ\TreeBuilder\STATUS_REMOVED;
+use const Differ\TreeBuilder\STATUS_ADDED;
+use const Differ\TreeBuilder\STATUS_CHANGED;
+use const Differ\TreeBuilder\STATUS_UNCHANGED;
 
 const INDENT_SIZE = 4;
 
