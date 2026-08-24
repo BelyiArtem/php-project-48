@@ -1,0 +1,17 @@
+{
+    "_hash": "4e84418ebcdf21ac924cc2fca0d7102a3a587d014ed0a3e2781820042b15782d",
+    "patches": {
+        "funct/funct": [
+            {
+                "package": "funct/funct",
+                "description": "PHP 8.4 compatibility",
+                "url": "patches/funct-php84.patch",
+                "sha256": "dde4c112ec82e6a246c33d1e5873f126cbf40d46aacbdb7cf5699ea8626bf5cb",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
+}

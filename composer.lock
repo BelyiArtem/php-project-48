@@ -4,8 +4,131 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5460572b07cae15c2620587a86c9676c",
+    "content-hash": "1cdd450d3ad6f608632369d081441d4c",
     "packages": [
+        {
+            "name": "cweagans/composer-configurable-plugin",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweagans/composer-configurable-plugin.git",
+                "reference": "15433906511a108a1806710e988629fd24b89974"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweagans/composer-configurable-plugin/zipball/15433906511a108a1806710e988629fd24b89974",
+                "reference": "15433906511a108a1806710e988629fd24b89974",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "~4.0",
+                "codeception/module-asserts": "^2.0",
+                "composer/composer": "~2.0",
+                "php-coveralls/php-coveralls": "~2.0",
+                "php-parallel-lint/php-parallel-lint": "^1.0.0",
+                "phpro/grumphp": "^1.8.0",
+                "sebastian/phpcpd": "^6.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a lightweight configuration system for Composer plugins.",
+            "support": {
+                "issues": "https://github.com/cweagans/composer-configurable-plugin/issues",
+                "source": "https://github.com/cweagans/composer-configurable-plugin/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/cweagans",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-12T04:58:58+00:00"
+        },
+        {
+            "name": "cweagans/composer-patches",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweagans/composer-patches.git",
+                "reference": "bfa6018a5f864653d9ed899b902ea72f858a2cf7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/bfa6018a5f864653d9ed899b902ea72f858a2cf7",
+                "reference": "bfa6018a5f864653d9ed899b902ea72f858a2cf7",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "cweagans/composer-configurable-plugin": "^2.0",
+                "ext-json": "*",
+                "php": ">=8.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "~4.0",
+                "codeception/module-asserts": "^2.0",
+                "codeception/module-cli": "^2.0",
+                "codeception/module-filesystem": "^2.0",
+                "composer/composer": "~2.0",
+                "php-coveralls/php-coveralls": "~2.0",
+                "php-parallel-lint/php-parallel-lint": "^1.0.0",
+                "phpro/grumphp": "^1.8.0",
+                "sebastian/phpcpd": "^6.0",
+                "squizlabs/php_codesniffer": "^4.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "_": "The following two lines ensure that composer-patches is loaded as early as possible.",
+                "class": "cweagans\\Composer\\Plugin\\Patches",
+                "plugin-modifies-downloads": true,
+                "plugin-modifies-install-path": true
+            },
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a way to patch Composer packages.",
+            "support": {
+                "issues": "https://github.com/cweagans/composer-patches/issues",
+                "source": "https://github.com/cweagans/composer-patches/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/cweagans",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-10-30T23:44:22+00:00"
+        },
         {
             "name": "docopt/docopt",
             "version": "1.0.6",
@@ -55,16 +178,16 @@
         },
         {
             "name": "funct/funct",
-            "version": "dev-fix-8.4-implicit-null-callable",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hexlet-components/phpfunct.git",
-                "reference": "161ee20b3ab6d3e6013ffa935b248b40ca80530a"
+                "url": "https://github.com/phpfunct/funct.git",
+                "reference": "6343055c2a8b7c1a4e44ed9d72bb46297d46b570"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hexlet-components/phpfunct/zipball/161ee20b3ab6d3e6013ffa935b248b40ca80530a",
-                "reference": "161ee20b3ab6d3e6013ffa935b248b40ca80530a",
+                "url": "https://api.github.com/repos/phpfunct/funct/zipball/6343055c2a8b7c1a4e44ed9d72bb46297d46b570",
+                "reference": "6343055c2a8b7c1a4e44ed9d72bb46297d46b570",
                 "shasum": ""
             },
             "require-dev": {
@@ -77,25 +200,18 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Funct\\": "src"
-                },
                 "files": [
                     "src/Collection.php",
                     "src/General.php",
                     "src/Invoke.php",
                     "src/Object.php",
                     "src/Strings.php"
-                ]
-            },
-            "scripts": {
-                "test": [
-                    "vendor/bin/phpunit"
                 ],
-                "test-ci": [
-                    "vendor/bin/phpunit -c phpunit.xml.ci"
-                ]
+                "psr-4": {
+                    "Funct\\": "src"
+                }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -107,9 +223,10 @@
             ],
             "description": "A PHP library with commonly used code blocks",
             "support": {
-                "source": "https://github.com/hexlet-components/phpfunct/tree/fix-8.4-implicit-null-callable"
+                "issues": "https://github.com/phpfunct/funct/issues",
+                "source": "https://github.com/phpfunct/funct/tree/1.6.0"
             },
-            "time": "2025-06-26T20:40:48+00:00"
+            "time": "2024-08-25T15:03:54+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2520,9 +2637,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "funct/funct": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},

@@ -21,12 +21,6 @@
     "bin": [
         "bin/gendiff"
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/hexlet-components/phpfunct"
-        }
-    ],
     "authors": [
         {
             "name": "Артём Белый",
@@ -35,12 +29,25 @@
     ],
     "require": {
         "docopt/docopt": "^1.0",
-        "funct/funct": "dev-fix-8.4-implicit-null-callable",
-        "symfony/yaml": "^7.3"
+        "funct/funct": "^1.6.0",
+        "symfony/yaml": "^7.3",
+        "cweagans/composer-patches": "^2.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^4.0",
         "phpunit/phpunit": "^13.2",
         "symfony/var-dumper": "^8.1"
+    },
+    "extra": {
+        "patches": {
+            "funct/funct": {
+                "PHP 8.4 compatibility": "patches/funct-php84.patch"
+            }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "cweagans/composer-patches": true
+        }
     }
 }
