@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2d25b9ddc9087019fc744e7231ef30b",
+    "content-hash": "e3d39faf6ce80a5fc0b5f64d5af833f8",
     "packages": [
         {
             "name": "docopt/docopt",
@@ -58,7 +58,7 @@
             "version": "dev-php84-compatibility",
             "source": {
                 "type": "git",
-                "url": "https://github.com/BelyiArtem/funct.git",
+                "url": "https://github.com/BelyiArtem/funct",
                 "reference": "58f661d8acdf1018f8caf8d89334a7fa608fb52c"
             },
             "dist": {
@@ -106,9 +106,6 @@
                 }
             ],
             "description": "A PHP library with commonly used code blocks",
-            "support": {
-                "source": "https://github.com/BelyiArtem/funct/tree/php84-compatibility"
-            },
             "time": "2026-08-24T17:25:34+00:00"
         },
         {

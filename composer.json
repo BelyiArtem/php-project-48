@@ -24,7 +24,8 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/BelyiArtem/funct"
+            "url": "https://github.com/BelyiArtem/funct",
+            "no-api": true
         }
     ],
     "authors": [
