@@ -1,5 +1,6 @@
 install:
 	composer install
+	patch -d vendor/funct/funct -p1 < patches/funct-php84.patch
 validate:
 	composer validate
 test:
