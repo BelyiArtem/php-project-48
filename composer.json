@@ -24,8 +24,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/BelyiArtem/funct",
-            "no-api": true
+            "url": "https://github.com/hexlet-components/phpfunct"
         }
     ],
     "authors": [
@@ -36,7 +35,7 @@
     ],
     "require": {
         "docopt/docopt": "^1.0",
-        "funct/funct": "dev-php84-compatibility#58f661d8acdf1018f8caf8d89334a7fa608fb52c",
+        "funct/funct": "dev-fix-8.4-implicit-null-callable",
         "symfony/yaml": "^7.3"
     },
     "require-dev": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fd091c4d585b28ae20f4685440c5514",
+    "content-hash": "5460572b07cae15c2620587a86c9676c",
     "packages": [
         {
             "name": "docopt/docopt",
@@ -55,16 +55,16 @@
         },
         {
             "name": "funct/funct",
-            "version": "dev-php84-compatibility",
+            "version": "dev-fix-8.4-implicit-null-callable",
             "source": {
                 "type": "git",
-                "url": "https://github.com/BelyiArtem/funct",
-                "reference": "58f661d8acdf1018f8caf8d89334a7fa608fb52c"
+                "url": "https://github.com/hexlet-components/phpfunct.git",
+                "reference": "161ee20b3ab6d3e6013ffa935b248b40ca80530a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BelyiArtem/funct/zipball/58f661d8acdf1018f8caf8d89334a7fa608fb52c",
-                "reference": "58f661d8acdf1018f8caf8d89334a7fa608fb52c",
+                "url": "https://api.github.com/repos/hexlet-components/phpfunct/zipball/161ee20b3ab6d3e6013ffa935b248b40ca80530a",
+                "reference": "161ee20b3ab6d3e6013ffa935b248b40ca80530a",
                 "shasum": ""
             },
             "require-dev": {
@@ -106,7 +106,10 @@
                 }
             ],
             "description": "A PHP library with commonly used code blocks",
-            "time": "2026-08-24T17:25:34+00:00"
+            "support": {
+                "source": "https://github.com/hexlet-components/phpfunct/tree/fix-8.4-implicit-null-callable"
+            },
+            "time": "2025-06-26T20:40:48+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
