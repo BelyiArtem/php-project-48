@@ -4,10 +4,7 @@
     "description": "gendiff application",
     "license": "MIT",
     "scripts": {
-        "test": "phpunit tests",
-        "post-install-cmd": [
-            "patch -d vendor/funct/funct -p1 < patches/funct-php84.patch"
-        ]
+        "test": "phpunit tests"
     },
     "autoload": {
         "files": [
