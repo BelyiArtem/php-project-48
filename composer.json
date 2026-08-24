@@ -10,6 +10,7 @@
         "files": [
             "src/Differ.php",
             "src/Parsers.php",
+            "src/Utilities.php",
             "src/TreeBuilder.php",
             "src/Formats.php",
             "src/Formatters/Stylish.php",
@@ -20,6 +21,12 @@
     "bin": [
         "bin/gendiff"
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/BelyiArtem/funct"
+        }
+    ],
     "authors": [
         {
             "name": "Артём Белый",
@@ -28,6 +35,7 @@
     ],
     "require": {
         "docopt/docopt": "^1.0",
+        "funct/funct": "dev-php84-compatibility",
         "symfony/yaml": "^7.3"
     },
     "require-dev": {

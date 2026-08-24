@@ -17,16 +17,3 @@ function format(array $tree, string $format = 'stylish'): string
         default => throw new InvalidArgumentException("Format $format is not supported!"),
     };
 }
-
-function toString(mixed $value): string
-{
-    if (is_string($value)) {
-        return $value;
-    }
-
-    return match (true) {
-        is_bool($value) => $value ? 'true' : 'false',
-        $value === null => 'null',
-        default => (string) $value,
-    };
-}

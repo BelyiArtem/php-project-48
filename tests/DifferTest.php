@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-use function Differ\Differ\readFile;
+use function Differ\Utilities\readFile;
 use function Differ\TreeBuilder\compare;
 use function Differ\Differ\genDiff;
 
@@ -21,26 +21,50 @@ class DifferTest extends TestCase
         $this->assertSame($expected, compare($firstData, $secondData));
     }
 
-    #[DataProvider('fileProvider')]
-    public function testGenDiff(string $inputFormat, string $outputFormat, string $expectedFixture): void
+    #[DataProvider('formatProvider')]
+    public function testStylish(string $inputFormat): void
     {
         $firstFile = $this->getFixtureFullPath("$inputFormat/file1.$inputFormat");
         $secondFile = $this->getFixtureFullPath("$inputFormat/file2.$inputFormat");
 
         $this->assertStringEqualsFile(
-            $this->getFixtureFullPath("expected/$expectedFixture"),
-            genDiff($firstFile, $secondFile, $outputFormat)
+            $this->getFixtureFullPath('expected/stylish.txt'),
+            genDiff($firstFile, $secondFile, 'stylish')
         );
     }
 
     #[DataProvider('formatProvider')]
-    public function testDefaultGenDiff(string $format): void
+    public function testPlain(string $inputFormat): void
     {
-        $firstFile = $this->getFixtureFullPath("$format/file1.$format");
-        $secondFile = $this->getFixtureFullPath("$format/file2.$format");
+        $firstFile = $this->getFixtureFullPath("$inputFormat/file1.$inputFormat");
+        $secondFile = $this->getFixtureFullPath("$inputFormat/file2.$inputFormat");
 
         $this->assertStringEqualsFile(
-            $this->getFixtureFullPath("expected/stylish.txt"),
+            $this->getFixtureFullPath('expected/plain.txt'),
+            genDiff($firstFile, $secondFile, 'plain')
+        );
+    }
+
+    #[DataProvider('formatProvider')]
+    public function testJson(string $inputFormat): void
+    {
+        $firstFile = $this->getFixtureFullPath("$inputFormat/file1.$inputFormat");
+        $secondFile = $this->getFixtureFullPath("$inputFormat/file2.$inputFormat");
+
+        $this->assertStringEqualsFile(
+            $this->getFixtureFullPath('expected/json.txt'),
+            genDiff($firstFile, $secondFile, 'json')
+        );
+    }
+
+    #[DataProvider('formatProvider')]
+    public function testDefault(string $inputFormat): void
+    {
+        $firstFile = $this->getFixtureFullPath("$inputFormat/file1.$inputFormat");
+        $secondFile = $this->getFixtureFullPath("$inputFormat/file2.$inputFormat");
+
+        $this->assertStringEqualsFile(
+            $this->getFixtureFullPath('expected/stylish.txt'),
             genDiff($firstFile, $secondFile)
         );
     }
@@ -52,25 +76,11 @@ class DifferTest extends TestCase
         readFile($wrongFile);
     }
 
-    public static function fileProvider(): array
-    {
-        return [
-            'json → stylish' => ['json', 'stylish', 'stylish.txt'],
-            'yml → stylish'  => ['yml', 'stylish', 'stylish.txt'],
-
-            'json → plain'   => ['json', 'plain', 'plain.txt'],
-            'yml → plain'    => ['yml', 'plain', 'plain.txt'],
-
-            'json → json'    => ['json', 'json', 'json.txt'],
-            'yml → json'     => ['yml', 'json', 'json.txt'],
-        ];
-    }
-
     public static function formatProvider(): array
     {
         return [
-            ['json'],
-            ['yml'],
+            'json input' => ['json'],
+            'yml input' => ['yml'],
         ];
     }
 

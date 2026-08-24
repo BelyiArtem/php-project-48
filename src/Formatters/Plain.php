@@ -2,7 +2,7 @@
 
 namespace Differ\Formatters\Plain;
 
-use function Differ\Formatter\toString;
+use function Differ\Utilities\toString;
 
 use const Differ\TreeBuilder\STATUS_NESTED;
 use const Differ\TreeBuilder\STATUS_REMOVED;
