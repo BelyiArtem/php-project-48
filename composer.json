@@ -36,7 +36,7 @@
     ],
     "require": {
         "docopt/docopt": "^1.0",
-        "funct/funct": "dev-php84-compatibility",
+        "funct/funct": "dev-php84-compatibility#58f661d8acdf1018f8caf8d89334a7fa608fb52c",
         "symfony/yaml": "^7.3"
     },
     "require-dev": {
